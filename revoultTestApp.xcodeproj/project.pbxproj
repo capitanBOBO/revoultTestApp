@@ -1,0 +1,592 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		05EE1E9221936C5D00A78783 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EE1E9121936C5D00A78783 /* AppDelegate.swift */; };
+		05EE1E9A21936C5D00A78783 /* revoultTestApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05EE1E9821936C5D00A78783 /* revoultTestApp.xcdatamodeld */; };
+		05EE1E9C21936C5F00A78783 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1E9B21936C5F00A78783 /* Assets.xcassets */; };
+		05EE1E9F21936C5F00A78783 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1E9D21936C5F00A78783 /* LaunchScreen.storyboard */; };
+		05EE1EAA21936C5F00A78783 /* revoultTestAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EE1EA921936C5F00A78783 /* revoultTestAppTests.swift */; };
+		05EE1EBA21937B5800A78783 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EE1EB921937B5800A78783 /* TableViewController.swift */; };
+		F41A5C2E636A8B463EDC67C2 /* Pods_revoultTestApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DACC73EAED36A365EC7A24 /* Pods_revoultTestApp.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		05EE1EA621936C5F00A78783 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05EE1E8621936C5D00A78783 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 05EE1E8D21936C5D00A78783;
+			remoteInfo = revoultTestApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		05EE1E8E21936C5D00A78783 /* revoultTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = revoultTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		05EE1E9121936C5D00A78783 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		05EE1E9921936C5D00A78783 /* revoultTestApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = revoultTestApp.xcdatamodel; sourceTree = "<group>"; };
+		05EE1E9B21936C5F00A78783 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		05EE1E9E21936C5F00A78783 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		05EE1EA021936C5F00A78783 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		05EE1EA521936C5F00A78783 /* revoultTestAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = revoultTestAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		05EE1EA921936C5F00A78783 /* revoultTestAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = revoultTestAppTests.swift; sourceTree = "<group>"; };
+		05EE1EAB21936C5F00A78783 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		05EE1EB921937B5800A78783 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		0CDD10049D894F1938929B11 /* Pods-revoultTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-revoultTestApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-revoultTestApp/Pods-revoultTestApp.release.xcconfig"; sourceTree = "<group>"; };
+		33DACC73EAED36A365EC7A24 /* Pods_revoultTestApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_revoultTestApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD2E8279EAA715B54405AD92 /* Pods-revoultTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-revoultTestApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-revoultTestApp/Pods-revoultTestApp.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		05EE1E8B21936C5D00A78783 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F41A5C2E636A8B463EDC67C2 /* Pods_revoultTestApp.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05EE1EA221936C5F00A78783 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		05EE1E8521936C5D00A78783 = {
+			isa = PBXGroup;
+			children = (
+				05EE1E9021936C5D00A78783 /* revoultTestApp */,
+				05EE1EA821936C5F00A78783 /* revoultTestAppTests */,
+				05EE1E8F21936C5D00A78783 /* Products */,
+				85FFCB5927C85755795F9A2B /* Pods */,
+				4F4C78D8B3E661110EC32945 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		05EE1E8F21936C5D00A78783 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				05EE1E8E21936C5D00A78783 /* revoultTestApp.app */,
+				05EE1EA521936C5F00A78783 /* revoultTestAppTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		05EE1E9021936C5D00A78783 /* revoultTestApp */ = {
+			isa = PBXGroup;
+			children = (
+				05EE1EB82193718100A78783 /* Controller */,
+				05EE1EB62193711A00A78783 /* DB */,
+				05EE1EB5219370FE00A78783 /* Source */,
+				05EE1EB42193703800A78783 /* Supporting Files */,
+			);
+			path = revoultTestApp;
+			sourceTree = "<group>";
+		};
+		05EE1EA821936C5F00A78783 /* revoultTestAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				05EE1EA921936C5F00A78783 /* revoultTestAppTests.swift */,
+				05EE1EAB21936C5F00A78783 /* Info.plist */,
+			);
+			path = revoultTestAppTests;
+			sourceTree = "<group>";
+		};
+		05EE1EB42193703800A78783 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				05EE1E9121936C5D00A78783 /* AppDelegate.swift */,
+				05EE1EA021936C5F00A78783 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		05EE1EB5219370FE00A78783 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				05EE1E9B21936C5F00A78783 /* Assets.xcassets */,
+				05EE1E9D21936C5F00A78783 /* LaunchScreen.storyboard */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		05EE1EB62193711A00A78783 /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				05EE1EB72193712B00A78783 /* Entity */,
+				05EE1E9821936C5D00A78783 /* revoultTestApp.xcdatamodeld */,
+			);
+			path = DB;
+			sourceTree = "<group>";
+		};
+		05EE1EB72193712B00A78783 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		05EE1EB82193718100A78783 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				05EE1EB921937B5800A78783 /* TableViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		4F4C78D8B3E661110EC32945 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				33DACC73EAED36A365EC7A24 /* Pods_revoultTestApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		85FFCB5927C85755795F9A2B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CD2E8279EAA715B54405AD92 /* Pods-revoultTestApp.debug.xcconfig */,
+				0CDD10049D894F1938929B11 /* Pods-revoultTestApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		05EE1E8D21936C5D00A78783 /* revoultTestApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05EE1EAE21936C5F00A78783 /* Build configuration list for PBXNativeTarget "revoultTestApp" */;
+			buildPhases = (
+				AC6B7C2CE5CA369F7A8B041B /* [CP] Check Pods Manifest.lock */,
+				05EE1E8A21936C5D00A78783 /* Sources */,
+				05EE1E8B21936C5D00A78783 /* Frameworks */,
+				05EE1E8C21936C5D00A78783 /* Resources */,
+				00C446D8EA2F4C6D6FA652B0 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = revoultTestApp;
+			productName = revoultTestApp;
+			productReference = 05EE1E8E21936C5D00A78783 /* revoultTestApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		05EE1EA421936C5F00A78783 /* revoultTestAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05EE1EB121936C5F00A78783 /* Build configuration list for PBXNativeTarget "revoultTestAppTests" */;
+			buildPhases = (
+				05EE1EA121936C5F00A78783 /* Sources */,
+				05EE1EA221936C5F00A78783 /* Frameworks */,
+				05EE1EA321936C5F00A78783 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				05EE1EA721936C5F00A78783 /* PBXTargetDependency */,
+			);
+			name = revoultTestAppTests;
+			productName = revoultTestAppTests;
+			productReference = 05EE1EA521936C5F00A78783 /* revoultTestAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		05EE1E8621936C5D00A78783 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "Иван Савин";
+				TargetAttributes = {
+					05EE1E8D21936C5D00A78783 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					05EE1EA421936C5F00A78783 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 05EE1E8D21936C5D00A78783;
+					};
+				};
+			};
+			buildConfigurationList = 05EE1E8921936C5D00A78783 /* Build configuration list for PBXProject "revoultTestApp" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 05EE1E8521936C5D00A78783;
+			productRefGroup = 05EE1E8F21936C5D00A78783 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				05EE1E8D21936C5D00A78783 /* revoultTestApp */,
+				05EE1EA421936C5F00A78783 /* revoultTestAppTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		05EE1E8C21936C5D00A78783 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05EE1E9F21936C5F00A78783 /* LaunchScreen.storyboard in Resources */,
+				05EE1E9C21936C5F00A78783 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05EE1EA321936C5F00A78783 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		00C446D8EA2F4C6D6FA652B0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-revoultTestApp/Pods-revoultTestApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-revoultTestApp/Pods-revoultTestApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AC6B7C2CE5CA369F7A8B041B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-revoultTestApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		05EE1E8A21936C5D00A78783 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05EE1E9A21936C5D00A78783 /* revoultTestApp.xcdatamodeld in Sources */,
+				05EE1EBA21937B5800A78783 /* TableViewController.swift in Sources */,
+				05EE1E9221936C5D00A78783 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05EE1EA121936C5F00A78783 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05EE1EAA21936C5F00A78783 /* revoultTestAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		05EE1EA721936C5F00A78783 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 05EE1E8D21936C5D00A78783 /* revoultTestApp */;
+			targetProxy = 05EE1EA621936C5F00A78783 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		05EE1E9D21936C5F00A78783 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05EE1E9E21936C5F00A78783 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		05EE1EAC21936C5F00A78783 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		05EE1EAD21936C5F00A78783 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		05EE1EAF21936C5F00A78783 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD2E8279EAA715B54405AD92 /* Pods-revoultTestApp.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6BM7CD8DD6;
+				INFOPLIST_FILE = "$(SRCROOT)/revoultTestApp/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = home.revoultTestApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		05EE1EB021936C5F00A78783 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0CDD10049D894F1938929B11 /* Pods-revoultTestApp.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6BM7CD8DD6;
+				INFOPLIST_FILE = "$(SRCROOT)/revoultTestApp/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = home.revoultTestApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		05EE1EB221936C5F00A78783 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6BM7CD8DD6;
+				INFOPLIST_FILE = revoultTestAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = home.revoultTestAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/revoultTestApp.app/revoultTestApp";
+			};
+			name = Debug;
+		};
+		05EE1EB321936C5F00A78783 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6BM7CD8DD6;
+				INFOPLIST_FILE = revoultTestAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = home.revoultTestAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/revoultTestApp.app/revoultTestApp";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		05EE1E8921936C5D00A78783 /* Build configuration list for PBXProject "revoultTestApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05EE1EAC21936C5F00A78783 /* Debug */,
+				05EE1EAD21936C5F00A78783 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05EE1EAE21936C5F00A78783 /* Build configuration list for PBXNativeTarget "revoultTestApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05EE1EAF21936C5F00A78783 /* Debug */,
+				05EE1EB021936C5F00A78783 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05EE1EB121936C5F00A78783 /* Build configuration list for PBXNativeTarget "revoultTestAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05EE1EB221936C5F00A78783 /* Debug */,
+				05EE1EB321936C5F00A78783 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		05EE1E9821936C5D00A78783 /* revoultTestApp.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				05EE1E9921936C5D00A78783 /* revoultTestApp.xcdatamodel */,
+			);
+			currentVersion = 05EE1E9921936C5D00A78783 /* revoultTestApp.xcdatamodel */;
+			path = revoultTestApp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 05EE1E8621936C5D00A78783 /* Project object */;
+}
