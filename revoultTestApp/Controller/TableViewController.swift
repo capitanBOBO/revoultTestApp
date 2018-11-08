@@ -12,11 +12,19 @@ class TableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(loadData), userInfo: nil, repeats: true)
     }
 
     // MARK: - Table view data source
-
+    
+    @objc func loadData() {
+        APIManager.loadDataWith(success: { (array) in
+            
+        }) { (error) in
+            print(error!)
+        }
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 0

@@ -13,6 +13,7 @@
 		05EE1E9F21936C5F00A78783 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1E9D21936C5F00A78783 /* LaunchScreen.storyboard */; };
 		05EE1EAA21936C5F00A78783 /* revoultTestAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EE1EA921936C5F00A78783 /* revoultTestAppTests.swift */; };
 		05EE1EBA21937B5800A78783 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EE1EB921937B5800A78783 /* TableViewController.swift */; };
+		05FF447F2194BE3E0003F6E4 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF447E2194BE3E0003F6E4 /* APIManager.swift */; };
 		F41A5C2E636A8B463EDC67C2 /* Pods_revoultTestApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DACC73EAED36A365EC7A24 /* Pods_revoultTestApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		05EE1EA921936C5F00A78783 /* revoultTestAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = revoultTestAppTests.swift; sourceTree = "<group>"; };
 		05EE1EAB21936C5F00A78783 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05EE1EB921937B5800A78783 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		05FF447E2194BE3E0003F6E4 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		0CDD10049D894F1938929B11 /* Pods-revoultTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-revoultTestApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-revoultTestApp/Pods-revoultTestApp.release.xcconfig"; sourceTree = "<group>"; };
 		33DACC73EAED36A365EC7A24 /* Pods_revoultTestApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_revoultTestApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD2E8279EAA715B54405AD92 /* Pods-revoultTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-revoultTestApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-revoultTestApp/Pods-revoultTestApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 		05EE1E9021936C5D00A78783 /* revoultTestApp */ = {
 			isa = PBXGroup;
 			children = (
+				05FF447D2194BE230003F6E4 /* API */,
 				05EE1EB82193718100A78783 /* Controller */,
 				05EE1EB62193711A00A78783 /* DB */,
 				05EE1EB5219370FE00A78783 /* Source */,
@@ -141,6 +144,14 @@
 				05EE1EB921937B5800A78783 /* TableViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		05FF447D2194BE230003F6E4 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				05FF447E2194BE3E0003F6E4 /* APIManager.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		4F4C78D8B3E661110EC32945 /* Frameworks */ = {
@@ -309,6 +320,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05FF447F2194BE3E0003F6E4 /* APIManager.swift in Sources */,
 				05EE1E9A21936C5D00A78783 /* revoultTestApp.xcdatamodeld in Sources */,
 				05EE1EBA21937B5800A78783 /* TableViewController.swift in Sources */,
 				05EE1E9221936C5D00A78783 /* AppDelegate.swift in Sources */,
