@@ -12,7 +12,7 @@ import Foundation
 protocol ViewModelType {
     
     func startDataUpdating()
-    func countOfRows() -> Int
+    func countOfRowsFor(_ section: Int) -> Int
     func cellViewModelFor(_ indexPath: IndexPath) -> CellViewModel?
     func didSelectCurrencyAt(_ indexPath: IndexPath)
     

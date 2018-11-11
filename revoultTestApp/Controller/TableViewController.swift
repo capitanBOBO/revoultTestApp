@@ -29,19 +29,24 @@ class TableViewController: UITableViewController, ViewModelDelegate {
     
     // MARK: - View model delegate
     
-    func update() {
-        self.tableView.reloadData()
+    func beginUpdate() {
+        self.tableView.beginUpdates()
+        self.tableView.reloadSections(viewModel.sectionsForUpdate(), with: .none)
+    }
+    
+    func endUpdate() {
+        self.tableView.endUpdates()
         MBProgressHUD.hide(for: self.view, animated: true)
     }
     
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1;
+        return 2;
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.countOfRows()
+        return viewModel.countOfRowsFor(section)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

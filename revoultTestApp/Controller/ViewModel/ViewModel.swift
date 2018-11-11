@@ -9,7 +9,9 @@
 import Foundation
 
 protocol ViewModelDelegate:class {
-    func update()
+//    func update()
+    func beginUpdate()
+    func endUpdate()
 }
 
 class ViewModel: ViewModelType, DataManagerDelegate {
@@ -17,6 +19,7 @@ class ViewModel: ViewModelType, DataManagerDelegate {
     private var networkManager = NetworkManager()
     private var dataManager = DataManager()
     private var currencyArray = [Currency]()
+    private var baseCurrency:Currency?
     private var curretnCurrency = "EUR"
     private var updateAllRows = true
     
@@ -33,18 +36,34 @@ class ViewModel: ViewModelType, DataManagerDelegate {
         }
     }
     
-    func countOfRows() -> Int {
-        return currencyArray.count
+    func countOfRowsFor(_ section: Int) -> Int {
+        if section == 0 {
+            return baseCurrency == nil ? 0 : 1
+        } else {
+            return currencyArray.count
+        }
     }
     
     func cellViewModelFor(_ indexPath: IndexPath) -> CellViewModel? {
-        guard currencyArray.count >= indexPath.row + 1 else {
-            return nil
+        if indexPath.section == 0  {
+            if let baseCurrency = baseCurrency {
+                return CellViewModel(currency: baseCurrency)
+            } else {
+                return nil
+            }
+        } else {
+            if currencyArray.count >= indexPath.row + 1 {
+                return CellViewModel(currency: currencyArray[indexPath.row])
+            } else {
+                return nil
+            }
         }
-        return CellViewModel(currency: currencyArray[indexPath.row])
     }
     
     func didSelectCurrencyAt(_ indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            return
+        }
         guard currencyArray.count >= indexPath.row + 1 else {
             return
         }
@@ -52,24 +71,29 @@ class ViewModel: ViewModelType, DataManagerDelegate {
         curretnCurrency = currencyArray[indexPath.row].name ?? ""
     }
     
-    func rowsForUpdate() -> [IndexPath] {
-        var retArray = [IndexPath]()
-        for index in 0...self.currencyArray.count {
-            if !updateAllRows {
-                continue
-            } else {
-                retArray.append(IndexPath(row: index, section: 0))
-            }
+    func sectionsForUpdate() -> IndexSet {
+        if updateAllRows {
+            updateAllRows = false
+            return IndexSet(arrayLiteral: 0, 1)
+        } else {
+            return IndexSet(arrayLiteral: 1)
         }
-        updateAllRows = false
-        return retArray
+        
     }
     
     func dataWasUpdated() {
         if let delegate = delegate {
             if let currencies = dataManager.loadCurrency() {
-                self.currencyArray = currencies
-                delegate.update()                
+                currencyArray.removeAll()
+                delegate.beginUpdate()
+                for currency in currencies {
+                    if currency.isBase {
+                        baseCurrency = currency
+                    } else {
+                        currencyArray.append(currency)
+                    }
+                }
+                delegate.endUpdate()
             }
         }
     }
