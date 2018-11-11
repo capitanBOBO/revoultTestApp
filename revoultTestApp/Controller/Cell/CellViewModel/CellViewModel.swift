@@ -10,19 +10,19 @@ import Foundation
 
 class CellViewModel: CellViewModelType {
     
-    private var currency:DataStruct
+    private var currency:Currency
     var currencyName:String {
         get {
-            return currency.currencyName
+            return currency.name ?? ""
         }
     }
     var currencyValue:String {
         get {
-            return "\(currency.currencyRate)"
+            return "\(currency.value)"
         }
     }
     
-    init(currency:DataStruct) {
+    init(currency:Currency) {
         self.currency = currency
     }
     

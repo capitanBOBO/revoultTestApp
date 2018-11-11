@@ -8,20 +8,28 @@
 
 import Foundation
 
-class ViewModel: ViewModelType {
+protocol ViewModelDelegate:class {
+    func update()
+}
+
+class ViewModel: ViewModelType, DataManagerDelegate {
     
     private var networkManager = NetworkManager()
-    private var currencyArray = [DataStruct]()
-    private var notificator:NotificationBlock?
+    private var dataManager = DataManager()
+    private var currencyArray = [Currency]()
     private var curretnCurrency = "EUR"
+    private var updateAllRows = true
     
-    func startDataUpdatingWith(_ notify: @escaping NotificationBlock) {
-        notificator = notify
+    weak var delegate:ViewModelDelegate?
+    
+    init() {
+        dataManager.delegate = self
+    }
+    
+    func startDataUpdating() {
         Timer.scheduledTimer(withTimeInterval: 1,
-                             repeats: true) { [weak self] (timer) in
-                                if let weakSelf = self {
-                                    weakSelf.loadData()
-                                }
+                             repeats: true) { [unowned self] (timer) in
+                                self.networkManager.loadData(forCurrency: self.curretnCurrency)
         }
     }
     
@@ -40,18 +48,29 @@ class ViewModel: ViewModelType {
         guard currencyArray.count >= indexPath.row + 1 else {
             return
         }
-        curretnCurrency = currencyArray[indexPath.row].currencyName
+        updateAllRows = true
+        curretnCurrency = currencyArray[indexPath.row].name ?? ""
     }
     
-    private func loadData() {
-        networkManager.loadData(forCurrency: curretnCurrency, success: { [unowned self] (array) in
-            self.currencyArray = array
-            if let notification = self.notificator {
-                notification()
+    func rowsForUpdate() -> [IndexPath] {
+        var retArray = [IndexPath]()
+        for index in 0...self.currencyArray.count {
+            if !updateAllRows {
+                continue
+            } else {
+                retArray.append(IndexPath(row: index, section: 0))
             }
-        }) { (error) in
-            print(error!)
+        }
+        updateAllRows = false
+        return retArray
+    }
+    
+    func dataWasUpdated() {
+        if let delegate = delegate {
+            if let currencies = dataManager.loadCurrency() {
+                self.currencyArray = currencies
+                delegate.update()                
+            }
         }
     }
-        
 }

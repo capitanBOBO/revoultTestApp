@@ -8,11 +8,10 @@
 
 import Foundation
 
-typealias NotificationBlock = ()->()
 
 protocol ViewModelType {
     
-    func startDataUpdatingWith(_ notify: @escaping NotificationBlock)
+    func startDataUpdating()
     func countOfRows() -> Int
     func cellViewModelFor(_ indexPath: IndexPath) -> CellViewModel?
     func didSelectCurrencyAt(_ indexPath: IndexPath)

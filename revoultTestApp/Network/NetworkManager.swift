@@ -9,42 +9,18 @@
 import Foundation
 import Alamofire
 
-struct DataStruct {
-    var currencyName: String
-    var currencyRate: Float
-    
-    init(currencyName: String, currencyRate: Float) {
-        self.currencyName = currencyName;
-        self.currencyRate = currencyRate;
-    }
-}
-
-typealias SuccessBlock = ([DataStruct])->()
-typealias FailureBlock = (Error?)->()
-
 class NetworkManager:NSObject {
     
-    var link = "https://revolut.duckdns.org/latest?base="
+    private var dataManager = DataManager()
     
-    func loadData(forCurrency currency:String = "EUR", success:@escaping SuccessBlock, failure:@escaping FailureBlock) {
-        let fullPath = link + currency
+    func loadData(forCurrency currency:String = "EUR") {
+        let fullPath = "https://revolut.duckdns.org/latest?base=" + currency
         Alamofire.request(fullPath).responseJSON { (response) in
             if let error = response.error {
-                failure(error)
+                print(error)
             } else {
                 if let jsonDictionary = response.result.value as? [String:Any] {
-                    var retArray:[DataStruct] = []
-                    if let base = jsonDictionary["base"] as? String {
-                        retArray.append(DataStruct(currencyName: base, currencyRate: 1))
-                    }
-                    if let rates = jsonDictionary["rates"] as? [String:Any] {
-                        for rate in rates {
-                            if let (name, value) = (rate.key, rate.value) as? (String, NSNumber) {
-                                retArray.append(DataStruct(currencyName: name, currencyRate: value.floatValue))
-                            }
-                        }
-                    }
-                    success(retArray)
+                    self.dataManager.saveCurrenciesFrom(jsonDictionary)
                 }
             }
         }

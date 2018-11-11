@@ -20,6 +20,10 @@
 		05FF448C219724630003F6E4 /* CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF448B219724630003F6E4 /* CellViewModel.swift */; };
 		05FF448E219736870003F6E4 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF448D219736870003F6E4 /* ViewModelType.swift */; };
 		05FF44902197373A0003F6E4 /* CellViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF448F2197373A0003F6E4 /* CellViewModelType.swift */; };
+		05FF4496219808F20003F6E4 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF4495219808F20003F6E4 /* DataManager.swift */; };
+		05FF449E21980F3A0003F6E4 /* Currency+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF449C21980F3A0003F6E4 /* Currency+CoreDataProperties.swift */; };
+		05FF449F21980F3A0003F6E4 /* Currency+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF449D21980F3A0003F6E4 /* Currency+CoreDataClass.swift */; };
+		05FF44A2219864130003F6E4 /* CD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF44A1219864130003F6E4 /* CD.swift */; };
 		F41A5C2E636A8B463EDC67C2 /* Pods_revoultTestApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DACC73EAED36A365EC7A24 /* Pods_revoultTestApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +55,10 @@
 		05FF448B219724630003F6E4 /* CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewModel.swift; sourceTree = "<group>"; };
 		05FF448D219736870003F6E4 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		05FF448F2197373A0003F6E4 /* CellViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewModelType.swift; sourceTree = "<group>"; };
+		05FF4495219808F20003F6E4 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		05FF449C21980F3A0003F6E4 /* Currency+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Currency+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		05FF449D21980F3A0003F6E4 /* Currency+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Currency+CoreDataClass.swift"; sourceTree = "<group>"; };
+		05FF44A1219864130003F6E4 /* CD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CD.swift; sourceTree = "<group>"; };
 		0CDD10049D894F1938929B11 /* Pods-revoultTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-revoultTestApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-revoultTestApp/Pods-revoultTestApp.release.xcconfig"; sourceTree = "<group>"; };
 		33DACC73EAED36A365EC7A24 /* Pods_revoultTestApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_revoultTestApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD2E8279EAA715B54405AD92 /* Pods-revoultTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-revoultTestApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-revoultTestApp/Pods-revoultTestApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -99,8 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				05FF447D2194BE230003F6E4 /* Network */,
-				05EE1EB82193718100A78783 /* Controller */,
 				05EE1EB62193711A00A78783 /* DB */,
+				05EE1EB82193718100A78783 /* Controller */,
 				05EE1EB5219370FE00A78783 /* Source */,
 				05EE1EB42193703800A78783 /* Supporting Files */,
 			);
@@ -137,18 +145,12 @@
 		05EE1EB62193711A00A78783 /* DB */ = {
 			isa = PBXGroup;
 			children = (
+				05FF44A0219863FB0003F6E4 /* CoreData */,
 				05FF448921971A600003F6E4 /* DataManager */,
-				05EE1EB72193712B00A78783 /* Entity */,
+				05FF449721980EC20003F6E4 /* Entity */,
 				05EE1E9821936C5D00A78783 /* revoultTestApp.xcdatamodeld */,
 			);
 			path = DB;
-			sourceTree = "<group>";
-		};
-		05EE1EB72193712B00A78783 /* Entity */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Entity;
 			sourceTree = "<group>";
 		};
 		05EE1EB82193718100A78783 /* Controller */ = {
@@ -191,6 +193,7 @@
 		05FF448921971A600003F6E4 /* DataManager */ = {
 			isa = PBXGroup;
 			children = (
+				05FF4495219808F20003F6E4 /* DataManager.swift */,
 			);
 			path = DataManager;
 			sourceTree = "<group>";
@@ -202,6 +205,23 @@
 				05FF448F2197373A0003F6E4 /* CellViewModelType.swift */,
 			);
 			path = CellViewModel;
+			sourceTree = "<group>";
+		};
+		05FF449721980EC20003F6E4 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				05FF449D21980F3A0003F6E4 /* Currency+CoreDataClass.swift */,
+				05FF449C21980F3A0003F6E4 /* Currency+CoreDataProperties.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		05FF44A0219863FB0003F6E4 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				05FF44A1219864130003F6E4 /* CD.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		4F4C78D8B3E661110EC32945 /* Frameworks */ = {
@@ -374,11 +394,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				05FF4483219704700003F6E4 /* TableViewCell.swift in Sources */,
+				05FF4496219808F20003F6E4 /* DataManager.swift in Sources */,
+				05FF449F21980F3A0003F6E4 /* Currency+CoreDataClass.swift in Sources */,
 				05FF447F2194BE3E0003F6E4 /* NetworkManager.swift in Sources */,
+				05FF44A2219864130003F6E4 /* CD.swift in Sources */,
 				05EE1E9A21936C5D00A78783 /* revoultTestApp.xcdatamodeld in Sources */,
 				05FF448C219724630003F6E4 /* CellViewModel.swift in Sources */,
 				05FF448E219736870003F6E4 /* ViewModelType.swift in Sources */,
 				05EE1EBA21937B5800A78783 /* TableViewController.swift in Sources */,
+				05FF449E21980F3A0003F6E4 /* Currency+CoreDataProperties.swift in Sources */,
 				05FF4487219719160003F6E4 /* ViewModel.swift in Sources */,
 				05FF44902197373A0003F6E4 /* CellViewModelType.swift in Sources */,
 				05EE1E9221936C5D00A78783 /* AppDelegate.swift in Sources */,

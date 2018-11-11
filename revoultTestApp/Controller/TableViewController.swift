@@ -9,30 +9,37 @@
 import UIKit
 import MBProgressHUD
 
-class TableViewController: UITableViewController {
+class TableViewController: UITableViewController, ViewModelDelegate {
 
-    var viewModel:ViewModel = ViewModel()
+    lazy var viewModel:ViewModel = ViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 45
         tableView.register(UINib(nibName: String(describing: TableViewCell.self), bundle: nil),
                            forCellReuseIdentifier: "cell")
-        viewModel.startDataUpdatingWith { [weak self] in
-            if let view = self?.view {
-                MBProgressHUD.hide(for: view, animated: true)
-            }
-            self?.tableView.reloadData()
-        }
+        viewModel.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         MBProgressHUD.showAdded(to: view, animated: true)
+        viewModel.startDataUpdating()
+    }
+    
+    // MARK: - View model delegate
+    
+    func update() {
+        self.tableView.reloadData()
+        MBProgressHUD.hide(for: self.view, animated: true)
     }
     
     // MARK: - Table view data source
 
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1;
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.countOfRows()
     }

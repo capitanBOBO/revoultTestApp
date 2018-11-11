@@ -2,3 +2,5 @@ Pods/
 Podfile.lock
 *.xcworkspace/
 *.xcuserdatad
+
+.DS_Store
