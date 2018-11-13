@@ -26,4 +26,9 @@ class CellViewModel: CellViewModelType {
         self.currency = currency
     }
     
+    func updateCurrencyWith(_ value: Float) {
+        currency.value = value
+        CD.shared.saveContext()
+    }
+    
 }

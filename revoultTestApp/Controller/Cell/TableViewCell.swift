@@ -8,9 +8,9 @@
 
 import UIKit
 
-class TableViewCell: UITableViewCell {
+class TableViewCell: UITableViewCell, UITextFieldDelegate {
     
-    var viewModel:CellViewModel! {
+    var viewModel:CellViewModelType! {
         didSet {
             self.titleLabel.text = viewModel.currencyName
             self.valueTextField.text = viewModel.currencyValue
@@ -22,10 +22,21 @@ class TableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        valueTextField.delegate = self
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        if string != "", let _ = Float(string) {
+            if let oldString = textField.text {
+                let newString = oldString.replacingCharacters(in: Range(range, in: oldString)!,
+                                                              with: string)
+                
+                viewModel.updateCurrencyWith(Float(newString) ?? 0)
+                return true
+            }
+//        }
+        
+        return false
     }
     
 }

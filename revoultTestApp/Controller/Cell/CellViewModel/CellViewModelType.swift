@@ -11,4 +11,5 @@ import Foundation
 protocol CellViewModelType {
     var currencyName:String { get }
     var currencyValue:String { get }
+    func updateCurrencyWith(_ value: Float)
 }

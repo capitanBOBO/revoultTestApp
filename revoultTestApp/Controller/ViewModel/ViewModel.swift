@@ -8,10 +8,10 @@
 
 import Foundation
 
+typealias ViewModeUpdateBlock = ()->()
+
 protocol ViewModelDelegate:class {
-//    func update()
-    func beginUpdate()
-    func endUpdate()
+    func updateNotificationWithBlock(_ viewModelUpdateBlock:ViewModeUpdateBlock)
 }
 
 class ViewModel: ViewModelType, DataManagerDelegate {
@@ -23,7 +23,7 @@ class ViewModel: ViewModelType, DataManagerDelegate {
     private var curretnCurrency = "EUR"
     private var updateAllRows = true
     
-    weak var delegate:ViewModelDelegate?
+    weak var delegate: ViewModelDelegate?
     
     init() {
         dataManager.delegate = self
@@ -85,15 +85,15 @@ class ViewModel: ViewModelType, DataManagerDelegate {
         if let delegate = delegate {
             if let currencies = dataManager.loadCurrency() {
                 currencyArray.removeAll()
-                delegate.beginUpdate()
-                for currency in currencies {
-                    if currency.isBase {
-                        baseCurrency = currency
-                    } else {
-                        currencyArray.append(currency)
+                delegate.updateNotificationWithBlock { [weak self] in
+                    for currency in currencies {
+                        if currency.isBase {
+                            self?.baseCurrency = currency
+                        } else {
+                            self?.currencyArray.append(currency)
+                        }
                     }
                 }
-                delegate.endUpdate()
             }
         }
     }
