@@ -19,5 +19,5 @@ extension Currency {
     @NSManaged public var name: String?
     @NSManaged public var value: Float
     @NSManaged public var isBase: Bool
-
+    
 }

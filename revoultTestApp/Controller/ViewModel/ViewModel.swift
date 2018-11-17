@@ -11,17 +11,16 @@ import Foundation
 typealias ViewModeUpdateBlock = ()->()
 
 protocol ViewModelDelegate:class {
-    func updateNotificationWithBlock(_ viewModelUpdateBlock:ViewModeUpdateBlock)
+    func updateCurrenciesList(isNeedUpdateBaseCurrency:Bool)
 }
 
 class ViewModel: ViewModelType, DataManagerDelegate {
     
+    var firstLoad = true
     private var networkManager = NetworkManager()
     private var dataManager = DataManager()
     private var currencyArray = [Currency]()
-    private var baseCurrency:Currency?
     private var curretnCurrency = "EUR"
-    private var updateAllRows = true
     
     weak var delegate: ViewModelDelegate?
     
@@ -38,63 +37,50 @@ class ViewModel: ViewModelType, DataManagerDelegate {
     
     func countOfRowsFor(_ section: Int) -> Int {
         if section == 0 {
-            return baseCurrency == nil ? 0 : 1
+            return currencyArray.count == 0 ? 0 : 1
         } else {
-            return currencyArray.count
+            return currencyArray.count - 1
         }
     }
     
     func cellViewModelFor(_ indexPath: IndexPath) -> CellViewModel? {
         if indexPath.section == 0  {
-            if let baseCurrency = baseCurrency {
-                return CellViewModel(currency: baseCurrency)
-            } else {
-                return nil
+            if let currency = currencyArray.first {
+                return CellViewModel(currency: currency)
             }
         } else {
-            if currencyArray.count >= indexPath.row + 1 {
-                return CellViewModel(currency: currencyArray[indexPath.row])
-            } else {
-                return nil
+            if let currency = currencyArray[indexPath.row + 1] as Currency? {
+                return CellViewModel(currency: currency)
             }
         }
+        return nil
     }
     
     func didSelectCurrencyAt(_ indexPath: IndexPath) {
         if indexPath.section == 0 {
             return
         }
-        guard currencyArray.count >= indexPath.row + 1 else {
-            return
+        if let currency = currencyArray[indexPath.row + 1] as Currency? {
+            curretnCurrency = currency.name ?? ""
         }
-        updateAllRows = true
-        curretnCurrency = currencyArray[indexPath.row].name ?? ""
-    }
-    
-    func sectionsForUpdate() -> IndexSet {
-        if updateAllRows {
-            updateAllRows = false
-            return IndexSet(arrayLiteral: 0, 1)
-        } else {
-            return IndexSet(arrayLiteral: 1)
-        }
-        
     }
     
     func dataWasUpdated() {
         if let delegate = delegate {
-            if let currencies = dataManager.loadCurrency() {
-                currencyArray.removeAll()
-                delegate.updateNotificationWithBlock { [weak self] in
-                    for currency in currencies {
-                        if currency.isBase {
-                            self?.baseCurrency = currency
-                        } else {
-                            self?.currencyArray.append(currency)
-                        }
-                    }
+            if currencyArray.count == 0 {
+                if let currencies = dataManager.loadCurrency() {
+                    self.currencyArray = currencies
+                    delegate.updateCurrenciesList(isNeedUpdateBaseCurrency: true)
+                }
+            } else {
+                if let currency = currencyArray.first, currency.isBase == false {
+                    currencyArray = currencyArray.sorted(by:{$1.isBase == false})
+                    delegate.updateCurrenciesList(isNeedUpdateBaseCurrency: true)
+                } else {
+                    delegate.updateCurrenciesList(isNeedUpdateBaseCurrency: false)
                 }
             }
+            
         }
     }
 }

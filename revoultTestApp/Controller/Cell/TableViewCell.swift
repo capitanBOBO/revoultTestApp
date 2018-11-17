@@ -31,7 +31,7 @@ class TableViewCell: UITableViewCell, UITextFieldDelegate {
                 let newString = oldString.replacingCharacters(in: Range(range, in: oldString)!,
                                                               with: string)
                 
-                viewModel.updateCurrencyWith(Float(newString) ?? 0)
+                viewModel.changeCurrencyValueOn(Float(newString) ?? 0)
                 return true
             }
 //        }

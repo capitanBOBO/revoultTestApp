@@ -12,6 +12,7 @@ import MBProgressHUD
 class TableViewController: UITableViewController, ViewModelDelegate {
 
     lazy var viewModel:ViewModelType = ViewModel()
+    private var didLayout = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,18 +30,29 @@ class TableViewController: UITableViewController, ViewModelDelegate {
     
     // MARK: - View model delegate
     
-    func updateNotificationWithBlock(_ viewModelUpdateBlock: ViewModeUpdateBlock) {
+    func updateCurrenciesList(isNeedUpdateBaseCurrency: Bool) {
         MBProgressHUD.hide(for: self.view, animated: true)
-        viewModelUpdateBlock()
-        self.tableView.beginUpdates()
-        self.tableView.reloadSections(viewModel.sectionsForUpdate(), with: .none)
-        self.tableView.endUpdates()
+        if !didLayout {
+            self.tableView.reloadData()
+            didLayout = true
+        } else {
+            self.tableView.performBatchUpdates({
+                let sections = isNeedUpdateBaseCurrency ? IndexSet(arrayLiteral: 0, 1) : IndexSet(arrayLiteral: 1)
+                self.tableView.reloadSections(sections, with: .none)
+            }) { (complete) in
+                if isNeedUpdateBaseCurrency {
+                    if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? TableViewCell {
+                        cell.valueTextField.becomeFirstResponder()
+                    }
+                }
+            }
+        }
     }
     
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2;
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

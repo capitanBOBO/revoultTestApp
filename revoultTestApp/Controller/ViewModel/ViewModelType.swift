@@ -16,6 +16,4 @@ protocol ViewModelType {
     func countOfRowsFor(_ section: Int) -> Int
     func cellViewModelFor(_ indexPath: IndexPath) -> CellViewModel?
     func didSelectCurrencyAt(_ indexPath: IndexPath)
-    func sectionsForUpdate() -> IndexSet
-    
 }

@@ -12,8 +12,9 @@ import CoreData
 class CD {
     
     static let shared = CD()
-    
-    private lazy var persistentContainer: NSPersistentContainer = {
+
+    lazy var persistentContainer: NSPersistentContainer = {
+        
         let container = NSPersistentContainer(name: "revoultTestApp")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -23,10 +24,28 @@ class CD {
         return container
     }()
     
-    lazy var managedObjectContext:NSManagedObjectContext = {
-        let moc = persistentContainer.viewContext
-        return moc
+    lazy var mainMoc:NSManagedObjectContext = {
+        let mainMoc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        mainMoc.persistentStoreCoordinator = persistentContainer.viewContext.persistentStoreCoordinator
+        return mainMoc
     }()
+    
+    lazy var privateMoc:NSManagedObjectContext = {
+        let privateMoc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        privateMoc.persistentStoreCoordinator = persistentContainer.viewContext.persistentStoreCoordinator
+        privateMoc.mergePolicy = NSRollbackMergePolicy
+        return privateMoc
+    }()
+    
+    var managedObjectContext:NSManagedObjectContext {
+        get {
+            if Thread.current.isMainThread {
+                return mainMoc
+            } else {
+                return privateMoc
+            }
+        }
+    }
     
     func saveContext () {
         let context = managedObjectContext
