@@ -14,7 +14,6 @@ class CD {
     static let shared = CD()
 
     lazy var persistentContainer: NSPersistentContainer = {
-        
         let container = NSPersistentContainer(name: "revoultTestApp")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -24,25 +23,24 @@ class CD {
         return container
     }()
     
-    lazy var mainMoc:NSManagedObjectContext = {
-        let mainMoc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        mainMoc.persistentStoreCoordinator = persistentContainer.viewContext.persistentStoreCoordinator
-        return mainMoc
+    lazy var backgroundCotext:NSManagedObjectContext = {
+        let context = persistentContainer.newBackgroundContext()
+        context.automaticallyMergesChangesFromParent = true
+        return context
     }()
     
-    lazy var privateMoc:NSManagedObjectContext = {
-        let privateMoc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-        privateMoc.persistentStoreCoordinator = persistentContainer.viewContext.persistentStoreCoordinator
-        privateMoc.mergePolicy = NSRollbackMergePolicy
-        return privateMoc
+    lazy var mainContext:NSManagedObjectContext = {
+        let context = persistentContainer.viewContext
+        context.automaticallyMergesChangesFromParent = true
+        return context
     }()
     
     var managedObjectContext:NSManagedObjectContext {
         get {
             if Thread.current.isMainThread {
-                return mainMoc
+                return mainContext
             } else {
-                return privateMoc
+                return backgroundCotext
             }
         }
     }

@@ -17,11 +17,11 @@ class DataManager:NSObject {
     
     override init() {
         super.init()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.contextDidSave(_:)), name: Notification.Name.NSManagedObjectContextDidSave, object: CD.shared.privateMoc)
+        NotificationCenter.default.addObserver(self, selector: #selector(contextDidSave(_:)), name: Notification.Name.NSManagedObjectContextDidSave, object: CD.shared.backgroundCotext)
     }
     
     deinit {
-        
+        NotificationCenter.default.removeObserver(self)
     }
     
     weak var delegate:DataManagerDelegate?
@@ -42,11 +42,22 @@ class DataManager:NSObject {
         }
     }
     
+    func loadBaseCurrency() -> Currency? {
+        let currencyFetch = Currency.fetchRequest() as NSFetchRequest<Currency>
+        currencyFetch.predicate = NSPredicate(format: "isBase = %@", NSNumber.init(value: true))
+        if let currencies = try? CD.shared.managedObjectContext.fetch(currencyFetch) {
+            return currencies.first
+        } else {
+            print("Load data failure")
+            return nil
+        }
+    }
+    
     func saveCurrenciesFrom(_ dictionary: [String:Any]) {
-        DispatchQueue.global().async {
+        DispatchQueue.global().async { [weak self] in
             if let (base, rates) = (dictionary["base"], dictionary["rates"]) as? (String, [String:Any]) {
                 var baseCurrencyValue:Float = 1.0
-                if let baseCurrency = self.loadCurrency(for: base)?.first {
+                if let baseCurrency = self?.loadCurrency(for: base)?.first {
                     baseCurrency.isBase = true
                     baseCurrencyValue = baseCurrency.value
                 } else {
@@ -57,7 +68,7 @@ class DataManager:NSObject {
                 }
                 for rate in rates {
                     if let (name, value) = (rate.key, rate.value) as? (String, NSNumber) {
-                        if let currentStateCurrency = self.loadCurrency(for: name)?.first {
+                        if let currentStateCurrency = self?.loadCurrency(for: name)?.first {
                             currentStateCurrency.isBase = false
                             currentStateCurrency.value = baseCurrencyValue * value.floatValue
                         } else {
@@ -74,12 +85,10 @@ class DataManager:NSObject {
     }
     
     @objc private func contextDidSave(_ notification: Notification) {
-        DispatchQueue.main.async {
-            CD.shared.managedObjectContext.mergeChanges(fromContextDidSave: notification)
-            if let delegate = self.delegate {
+        DispatchQueue.main.async { [weak self] in
+            if let delegate = self?.delegate {
                 delegate.dataWasUpdated()
             }
         }
     }
-    
 }

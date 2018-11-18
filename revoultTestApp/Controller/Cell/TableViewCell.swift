@@ -26,16 +26,13 @@ class TableViewCell: UITableViewCell, UITextFieldDelegate {
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        if string != "", let _ = Float(string) {
-            if let oldString = textField.text {
-                let newString = oldString.replacingCharacters(in: Range(range, in: oldString)!,
-                                                              with: string)
-                
-                viewModel.changeCurrencyValueOn(Float(newString) ?? 0)
-                return true
-            }
-//        }
-        
+        if let oldString = textField.text {
+            let newString = oldString.replacingCharacters(in: Range(range, in: oldString)!,
+                                                          with: string)
+            
+            viewModel.changeCurrencyValueOn(Float(newString) ?? 0)
+            return true
+        }
         return false
     }
     

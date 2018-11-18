@@ -26,6 +26,9 @@ class ViewModel: ViewModelType, DataManagerDelegate {
     
     init() {
         dataManager.delegate = self
+        if let baseCurrency = dataManager.loadBaseCurrency() {
+            curretnCurrency = baseCurrency.name!
+        }
     }
     
     func startDataUpdating() {
@@ -67,14 +70,15 @@ class ViewModel: ViewModelType, DataManagerDelegate {
     
     func dataWasUpdated() {
         if let delegate = delegate {
+            guard let currencies = dataManager.loadCurrency() else {
+                return
+            }
             if currencyArray.count == 0 {
-                if let currencies = dataManager.loadCurrency() {
-                    self.currencyArray = currencies
-                    delegate.updateCurrenciesList(isNeedUpdateBaseCurrency: true)
-                }
+                self.currencyArray = currencies
+                delegate.updateCurrenciesList(isNeedUpdateBaseCurrency: true)
             } else {
                 if let currency = currencyArray.first, currency.isBase == false {
-                    currencyArray = currencyArray.sorted(by:{$1.isBase == false})
+                    currencyArray = currencies
                     delegate.updateCurrenciesList(isNeedUpdateBaseCurrency: true)
                 } else {
                     delegate.updateCurrenciesList(isNeedUpdateBaseCurrency: false)
