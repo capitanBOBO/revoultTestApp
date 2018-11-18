@@ -11,14 +11,16 @@ import Foundation
 class CellViewModel: CellViewModelType {
     
     private var currency:Currency
+    private var dataManager = DataManager()
+    
     var currencyName:String {
         get {
-            return currency.name ?? ""
+            return currency.name
         }
     }
     var currencyValue:String {
         get {
-            return "\(currency.value)"
+            return String(format: "%.4f", currency.value)
         }
     }
     
@@ -27,8 +29,7 @@ class CellViewModel: CellViewModelType {
     }
     
     func changeCurrencyValueOn(_ value: Float) {
-        self.currency.value = value
-        CD.shared.saveContext()
+        dataManager.updateBaseCurrency(value: value)
     }
     
 }

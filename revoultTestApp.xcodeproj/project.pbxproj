@@ -156,8 +156,8 @@
 		05EE1EB82193718100A78783 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				05FF4485219718D90003F6E4 /* ViewModel */,
 				05FF4480219702CA0003F6E4 /* Cell */,
+				05FF4485219718D90003F6E4 /* ViewModel */,
 				05EE1EB921937B5800A78783 /* TableViewController.swift */,
 			);
 			path = Controller;

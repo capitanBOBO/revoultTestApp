@@ -53,29 +53,48 @@ class DataManager:NSObject {
         }
     }
     
+    func updateBaseCurrency(value: Float) {
+        DispatchQueue.global().async { [weak self] in
+            if let currencies = self?.loadCurrency() {
+                for currency in currencies {
+                    if currency.isBase {
+                        currency.value = value
+                    } else {
+                        currency.value = currency.rate * value
+                    }
+                }
+                CD.shared.saveContext()
+            }
+        }
+    }
+    
     func saveCurrenciesFrom(_ dictionary: [String:Any]) {
         DispatchQueue.global().async { [weak self] in
             if let (base, rates) = (dictionary["base"], dictionary["rates"]) as? (String, [String:Any]) {
                 var baseCurrencyValue:Float = 1.0
                 if let baseCurrency = self?.loadCurrency(for: base)?.first {
                     baseCurrency.isBase = true
+                    baseCurrency.rate = 1.0
                     baseCurrencyValue = baseCurrency.value
                 } else {
                     let baseCurrency = Currency(context: CD.shared.managedObjectContext)
                     baseCurrency.isBase = true
                     baseCurrency.name = base
                     baseCurrency.value = 1.0
+                    baseCurrency.rate = 1.0
                 }
                 for rate in rates {
-                    if let (name, value) = (rate.key, rate.value) as? (String, NSNumber) {
+                    if let (name, rate) = (rate.key, rate.value) as? (String, NSNumber) {
                         if let currentStateCurrency = self?.loadCurrency(for: name)?.first {
                             currentStateCurrency.isBase = false
-                            currentStateCurrency.value = baseCurrencyValue * value.floatValue
+                            currentStateCurrency.value = baseCurrencyValue * rate.floatValue
+                            currentStateCurrency.rate = rate.floatValue
                         } else {
                             let currency = Currency(context: CD.shared.managedObjectContext)
                             currency.isBase = false
                             currency.name = name
-                            currency.value = baseCurrencyValue * value.floatValue
+                            currency.value = baseCurrencyValue * rate.floatValue
+                            currency.rate = rate.floatValue
                         }
                     }
                 }
@@ -85,10 +104,8 @@ class DataManager:NSObject {
     }
     
     @objc private func contextDidSave(_ notification: Notification) {
-        DispatchQueue.main.async { [weak self] in
-            if let delegate = self?.delegate {
-                delegate.dataWasUpdated()
-            }
+        DispatchQueue.main.sync { [weak self] in
+            self?.delegate?.dataWasUpdated()
         }
     }
 }

@@ -15,12 +15,12 @@ class NetworkManager:NSObject {
     
     func loadData(forCurrency currency:String = "EUR") {
         let fullPath = "https://revolut.duckdns.org/latest?base=" + currency
-        Alamofire.request(fullPath).responseJSON { (response) in
+        Alamofire.request(fullPath).responseJSON { [weak self] (response) in
             if let error = response.error {
                 print(error)
             } else {
                 if let jsonDictionary = response.result.value as? [String:Any] {
-                    self.dataManager.saveCurrenciesFrom(jsonDictionary)
+                    self?.dataManager.saveCurrenciesFrom(jsonDictionary)
                 }
             }
         }

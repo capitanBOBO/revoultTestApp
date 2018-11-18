@@ -13,6 +13,7 @@ class TableViewController: UITableViewController, ViewModelDelegate {
 
     lazy var viewModel:ViewModelType = ViewModel()
     private var didLayout = false
+    private var canUpdate = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,19 +32,22 @@ class TableViewController: UITableViewController, ViewModelDelegate {
     // MARK: - View model delegate
     
     func updateCurrenciesList(isNeedUpdateBaseCurrency: Bool) {
-        MBProgressHUD.hide(for: self.view, animated: true)
-        if !didLayout {
+        MBProgressHUD.hide(for: view, animated: true)
+        guard canUpdate else {
+            return
+        }
+        guard didLayout else {
             self.tableView.reloadData()
             didLayout = true
-        } else {
-            self.tableView.performBatchUpdates({
-                let sections = isNeedUpdateBaseCurrency ? IndexSet(arrayLiteral: 0, 1) : IndexSet(arrayLiteral: 1)
-                self.tableView.reloadSections(sections, with: .none)
-            }) { (complete) in
-                if isNeedUpdateBaseCurrency {
-                    if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? TableViewCell {
-                        cell.valueTextField.becomeFirstResponder()
-                    }
+            return
+        }
+        self.tableView.performBatchUpdates({
+            let sections = isNeedUpdateBaseCurrency ? IndexSet(arrayLiteral: 0, 1) : IndexSet(arrayLiteral: 1)
+            self.tableView.reloadSections(sections, with: .none)
+        }) { (complete) in
+            if isNeedUpdateBaseCurrency {
+                if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? TableViewCell {
+                    cell.valueTextField.becomeFirstResponder()
                 }
             }
         }
@@ -71,13 +75,18 @@ class TableViewController: UITableViewController, ViewModelDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         MBProgressHUD.showAdded(to: view, animated: true)
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         viewModel.didSelectCurrencyAt(indexPath)
-        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: true)
     }
     
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        canUpdate = false
         if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? TableViewCell {
             cell.valueTextField.resignFirstResponder()
         }
+    }
+    
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        canUpdate = true
     }
 }

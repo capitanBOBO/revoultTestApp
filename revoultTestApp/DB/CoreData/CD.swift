@@ -25,7 +25,6 @@ class CD {
     
     lazy var backgroundCotext:NSManagedObjectContext = {
         let context = persistentContainer.newBackgroundContext()
-        context.automaticallyMergesChangesFromParent = true
         return context
     }()
     

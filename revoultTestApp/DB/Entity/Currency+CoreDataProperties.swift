@@ -16,8 +16,8 @@ extension Currency {
         return NSFetchRequest<Currency>(entityName: "Currency")
     }
     
-    @NSManaged public var name: String?
+    @NSManaged public var name: String
     @NSManaged public var value: Float
     @NSManaged public var isBase: Bool
-    
+    @NSManaged public var rate: Float
 }
