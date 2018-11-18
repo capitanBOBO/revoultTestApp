@@ -41,14 +41,13 @@ class TableViewController: UITableViewController, ViewModelDelegate {
             didLayout = true
             return
         }
-        self.tableView.performBatchUpdates({
+        self.tableView.performBatchUpdates({ [weak self] in
             let sections = isNeedUpdateBaseCurrency ? IndexSet(arrayLiteral: 0, 1) : IndexSet(arrayLiteral: 1)
-            self.tableView.reloadSections(sections, with: .none)
-        }) { (complete) in
+            self?.tableView.reloadSections(sections, with: .none)
+            
+        }) { [weak self] (complete) in
             if isNeedUpdateBaseCurrency {
-                if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? TableViewCell {
-                    cell.valueTextField.becomeFirstResponder()
-                }
+                self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
             }
         }
     }
@@ -75,18 +74,23 @@ class TableViewController: UITableViewController, ViewModelDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         MBProgressHUD.showAdded(to: view, animated: true)
-        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         viewModel.didSelectCurrencyAt(indexPath)
     }
     
-    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    override func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
         canUpdate = false
         if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? TableViewCell {
             cell.valueTextField.resignFirstResponder()
         }
     }
     
-    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         canUpdate = true
+    }
+    
+    override func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? TableViewCell {
+            cell.valueTextField.becomeFirstResponder()
+        }
     }
 }
