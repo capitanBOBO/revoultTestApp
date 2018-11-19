@@ -23,6 +23,7 @@ class TableViewCell: UITableViewCell, UITextFieldDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         valueTextField.delegate = self
+        selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

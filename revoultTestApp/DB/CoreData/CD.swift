@@ -25,6 +25,7 @@ class CD {
     
     lazy var backgroundCotext:NSManagedObjectContext = {
         let context = persistentContainer.newBackgroundContext()
+        context.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
         return context
     }()
     
