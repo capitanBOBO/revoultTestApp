@@ -29,15 +29,23 @@ class TableViewController: UITableViewController, ViewModelDelegate {
         viewModel.startDataUpdating()
     }
     
-    // MARK: - View model delegate
+    //MARK: Helper
+    
+    func textFieldBecomeFirstResponder(_ becomes:Bool) {
+        if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? TableViewCell {
+            cell.textFieldBecomeFirstResponder(becomes)
+        }
+    }
+    
+    // MARK: View model delegate
     
     func updateCurrenciesList(isNeedUpdateBaseCurrency: Bool) {
-        MBProgressHUD.hide(for: view, animated: true)
         guard canUpdate else {
             return
         }
         guard didLayout else {
-            self.tableView.reloadData()
+            MBProgressHUD.hide(for: view, animated: true)
+            tableView.reloadData()
             didLayout = true
             return
         }
@@ -48,14 +56,12 @@ class TableViewController: UITableViewController, ViewModelDelegate {
         }) { [weak self] (complete) in
             if isNeedUpdateBaseCurrency {
                 self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-                if let cell = self?.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? TableViewCell {
-                    cell.valueTextField.becomeFirstResponder()
-                }
+                self?.textFieldBecomeFirstResponder(true)
             }
         }
     }
     
-    // MARK: - Table view data source
+    // MARK: Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -73,14 +79,12 @@ class TableViewController: UITableViewController, ViewModelDelegate {
         return cell
     }
     
-    //MARK: - Table view delegate
+    //MARK: Table view delegate
     
 
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         canUpdate = false
-        if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? TableViewCell {
-            cell.valueTextField.resignFirstResponder()
-        }
+        self.textFieldBecomeFirstResponder(false)
     }
     
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -98,8 +102,6 @@ class TableViewController: UITableViewController, ViewModelDelegate {
     }
     
     override func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? TableViewCell {
-            cell.valueTextField.becomeFirstResponder()
-        }
+        self.textFieldBecomeFirstResponder(true)
     }
 }

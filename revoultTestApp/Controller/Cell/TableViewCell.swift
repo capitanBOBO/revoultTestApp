@@ -17,8 +17,8 @@ class TableViewCell: UITableViewCell, UITextFieldDelegate {
         }
     }
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var valueTextField: UITextField!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var valueTextField: UITextField!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,6 +30,16 @@ class TableViewCell: UITableViewCell, UITextFieldDelegate {
         
         if selected, !viewModel.isBaseCurrency {
             viewModel.setCurrencyAsBase()
+        }
+    }
+    
+    //MARK: Helper
+    
+    func textFieldBecomeFirstResponder(_ becomes: Bool) {
+        if becomes {
+            valueTextField.becomeFirstResponder()
+        } else {
+            valueTextField.resignFirstResponder()
         }
     }
     
