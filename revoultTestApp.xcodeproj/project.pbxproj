@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05BC0E5D21A33FD300A2E5D5 /* requestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC0E5C21A33FD300A2E5D5 /* requestTest.swift */; };
+		05BC0E5F21A34B1800A2E5D5 /* dataManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC0E5E21A34B1800A2E5D5 /* dataManagerTest.swift */; };
 		05EE1E9221936C5D00A78783 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EE1E9121936C5D00A78783 /* AppDelegate.swift */; };
 		05EE1E9A21936C5D00A78783 /* revoultTestApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05EE1E9821936C5D00A78783 /* revoultTestApp.xcdatamodeld */; };
 		05EE1E9C21936C5F00A78783 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1E9B21936C5F00A78783 /* Assets.xcassets */; };
 		05EE1E9F21936C5F00A78783 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1E9D21936C5F00A78783 /* LaunchScreen.storyboard */; };
-		05EE1EAA21936C5F00A78783 /* revoultTestAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EE1EA921936C5F00A78783 /* revoultTestAppTests.swift */; };
 		05EE1EBA21937B5800A78783 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EE1EB921937B5800A78783 /* TableViewController.swift */; };
 		05FF447F2194BE3E0003F6E4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF447E2194BE3E0003F6E4 /* NetworkManager.swift */; };
 		05FF4483219704700003F6E4 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF4481219704700003F6E4 /* TableViewCell.swift */; };
@@ -38,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		05BC0E5C21A33FD300A2E5D5 /* requestTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = requestTest.swift; sourceTree = "<group>"; };
+		05BC0E5E21A34B1800A2E5D5 /* dataManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataManagerTest.swift; sourceTree = "<group>"; };
 		05EE1E8E21936C5D00A78783 /* revoultTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = revoultTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05EE1E9121936C5D00A78783 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05EE1E9921936C5D00A78783 /* revoultTestApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = revoultTestApp.xcdatamodel; sourceTree = "<group>"; };
@@ -45,7 +48,6 @@
 		05EE1E9E21936C5F00A78783 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		05EE1EA021936C5F00A78783 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05EE1EA521936C5F00A78783 /* revoultTestAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = revoultTestAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		05EE1EA921936C5F00A78783 /* revoultTestAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = revoultTestAppTests.swift; sourceTree = "<group>"; };
 		05EE1EAB21936C5F00A78783 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05EE1EB921937B5800A78783 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		05FF447E2194BE3E0003F6E4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -118,8 +120,9 @@
 		05EE1EA821936C5F00A78783 /* revoultTestAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				05EE1EA921936C5F00A78783 /* revoultTestAppTests.swift */,
 				05EE1EAB21936C5F00A78783 /* Info.plist */,
+				05BC0E5C21A33FD300A2E5D5 /* requestTest.swift */,
+				05BC0E5E21A34B1800A2E5D5 /* dataManagerTest.swift */,
 			);
 			path = revoultTestAppTests;
 			sourceTree = "<group>";
@@ -413,7 +416,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05EE1EAA21936C5F00A78783 /* revoultTestAppTests.swift in Sources */,
+				05BC0E5D21A33FD300A2E5D5 /* requestTest.swift in Sources */,
+				05BC0E5F21A34B1800A2E5D5 /* dataManagerTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

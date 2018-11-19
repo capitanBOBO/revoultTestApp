@@ -25,6 +25,7 @@ class revoultTestAppTests: XCTestCase {
     }
 
     func testViewModelGetCellViewModel() {
+        
     }
 
 }
