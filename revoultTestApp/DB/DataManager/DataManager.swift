@@ -68,6 +68,20 @@ class DataManager:NSObject {
         }
     }
     
+    func setCurrencyAsBase(_ name: String) {
+        DispatchQueue.global().async { [weak self] in
+            guard let currencies = self?.loadCurrency() else {
+                return
+            }
+            if let oldBase = currencies.filter({$0.isBase}).first,
+                let newBase = currencies.filter({$0.name == name}).first {
+                oldBase.isBase = false
+                newBase.isBase = true
+                CD.shared.saveContext()
+            }
+        }
+    }
+    
     func saveCurrenciesFrom(_ dictionary: [String:Any]) {
         DispatchQueue.global().async { [weak self] in
             if let (base, rates) = (dictionary["base"], dictionary["rates"]) as? (String, [String:Any]) {

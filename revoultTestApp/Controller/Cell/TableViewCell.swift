@@ -25,6 +25,24 @@ class TableViewCell: UITableViewCell, UITextFieldDelegate {
         valueTextField.delegate = self
     }
 
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        if selected, !viewModel.isBaseCurrency {
+            viewModel.setCurrencyAsBase()
+        }
+    }
+    
+    //MARK: UITextFiled delegate
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if !viewModel.isBaseCurrency {
+            viewModel.setCurrencyAsBase()
+            return false
+        }
+        return true
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let oldString = textField.text {
             let newString = oldString.replacingCharacters(in: Range(range, in: oldString)!,

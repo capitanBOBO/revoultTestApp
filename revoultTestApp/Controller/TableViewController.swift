@@ -48,6 +48,9 @@ class TableViewController: UITableViewController, ViewModelDelegate {
         }) { [weak self] (complete) in
             if isNeedUpdateBaseCurrency {
                 self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                if let cell = self?.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? TableViewCell {
+                    cell.valueTextField.becomeFirstResponder()
+                }
             }
         }
     }
@@ -72,16 +75,22 @@ class TableViewController: UITableViewController, ViewModelDelegate {
     
     //MARK: - Table view delegate
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        MBProgressHUD.showAdded(to: view, animated: true)
-        viewModel.didSelectCurrencyAt(indexPath)
-    }
-    
-    override func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         canUpdate = false
         if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? TableViewCell {
             cell.valueTextField.resignFirstResponder()
         }
+    }
+    
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            canUpdate = true
+        }
+    }
+    
+    override func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        canUpdate = false
     }
     
     override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {

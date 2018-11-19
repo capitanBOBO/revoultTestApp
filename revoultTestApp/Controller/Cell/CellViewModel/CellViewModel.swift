@@ -20,7 +20,13 @@ class CellViewModel: CellViewModelType {
     }
     var currencyValue:String {
         get {
-            return String(format: "%.4f", currency.value)
+            return String(format: "%.3f", currency.value)
+        }
+    }
+    
+    var isBaseCurrency:Bool {
+        get {
+            return currency.isBase
         }
     }
     
@@ -30,6 +36,10 @@ class CellViewModel: CellViewModelType {
     
     func changeCurrencyValueOn(_ value: Float) {
         dataManager.updateBaseCurrency(value: value)
+    }
+    
+    func setCurrencyAsBase() {
+        dataManager.setCurrencyAsBase(currency.name)
     }
     
 }

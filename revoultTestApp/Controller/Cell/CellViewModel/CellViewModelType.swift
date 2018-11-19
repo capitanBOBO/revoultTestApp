@@ -11,5 +11,7 @@ import Foundation
 protocol CellViewModelType {
     var currencyName:String { get }
     var currencyValue:String { get }
+    var isBaseCurrency:Bool { get }
     func changeCurrencyValueOn(_ value: Float)
+    func setCurrencyAsBase()
 }

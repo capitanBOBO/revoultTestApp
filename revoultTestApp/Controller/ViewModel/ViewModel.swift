@@ -20,21 +20,21 @@ class ViewModel: ViewModelType, DataManagerDelegate {
     private var networkManager = NetworkManager()
     private var dataManager = DataManager()
     private var currencyArray = [Currency]()
-    private var curretnCurrency = "EUR"
+    private var curretnBaseCurrency = "EUR"
     
     weak var delegate: ViewModelDelegate?
     
     init() {
         dataManager.delegate = self
         if let baseCurrency = dataManager.loadBaseCurrency() {
-            curretnCurrency = baseCurrency.name
+            curretnBaseCurrency = baseCurrency.name
         }
     }
     
     func startDataUpdating() {
         Timer.scheduledTimer(withTimeInterval: 1,
                              repeats: true) { [weak self] (timer) in
-                                self?.networkManager.loadData(forCurrency: self?.curretnCurrency ?? "EUR")
+                                self?.networkManager.loadData(forCurrency: self?.curretnBaseCurrency ?? "EUR")
         }
     }
     
@@ -59,15 +59,6 @@ class ViewModel: ViewModelType, DataManagerDelegate {
         return nil
     }
     
-    func didSelectCurrencyAt(_ indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            return
-        }
-        if let currency = currencyArray[indexPath.row + 1] as Currency? {
-            curretnCurrency = currency.name
-        }
-    }
-    
     func dataWasUpdated() {
         guard let currencies = dataManager.loadCurrency() else {
             return
@@ -76,9 +67,13 @@ class ViewModel: ViewModelType, DataManagerDelegate {
             currencyArray = currencies
             delegate?.updateCurrenciesList(isNeedUpdateBaseCurrency: true)
         } else {
-            if let newCurrency = currencies.first, let oldCurrency = currencyArray.first {
-                self.currencyArray = currencies
-                delegate?.updateCurrenciesList(isNeedUpdateBaseCurrency: newCurrency != oldCurrency)
+            currencyArray = currencies
+            if let baseCurrency = currencies.filter({$0.isBase}).first,
+                curretnBaseCurrency != baseCurrency.name{
+                curretnBaseCurrency = baseCurrency.name
+                delegate?.updateCurrenciesList(isNeedUpdateBaseCurrency: true)
+            } else {
+                delegate?.updateCurrenciesList(isNeedUpdateBaseCurrency: false)
             }
         }
     }
