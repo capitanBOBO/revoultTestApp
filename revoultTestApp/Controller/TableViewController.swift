@@ -26,7 +26,9 @@ class TableViewController: UITableViewController, ViewModelDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         MBProgressHUD.showAdded(to: view, animated: true)
-        viewModel.startDataUpdating()
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] (timer) in
+            self?.viewModel.downloadData()
+        }
     }
     
     //MARK: Helper
@@ -59,6 +61,10 @@ class TableViewController: UITableViewController, ViewModelDelegate {
                 self?.textFieldBecomeFirstResponder(true)
             }
         }
+    }
+    
+    func updateError(_ errorDescription: String) {
+        
     }
     
     // MARK: Table view data source

@@ -11,13 +11,13 @@ import Foundation
 typealias ViewModeUpdateBlock = ()->()
 
 protocol ViewModelDelegate:class {
-    func updateCurrenciesList(isNeedUpdateBaseCurrency:Bool)
+    func updateCurrenciesList(isNeedUpdateBaseCurrency: Bool)
+    func updateError(_ errorDescription: String)
 }
 
 class ViewModel: ViewModelType, DataManagerDelegate {
     
     var firstLoad = true
-    private var networkManager = NetworkManager()
     private var dataManager = DataManager()
     private var currencyArray = [Currency]()
     private var curretnBaseCurrency = "EUR"
@@ -31,11 +31,8 @@ class ViewModel: ViewModelType, DataManagerDelegate {
         }
     }
     
-    func startDataUpdating() {
-        Timer.scheduledTimer(withTimeInterval: 1,
-                             repeats: true) { [weak self] (timer) in
-                                self?.networkManager.loadData(forCurrency: self?.curretnBaseCurrency ?? "EUR")
-        }
+    func downloadData() {
+        dataManager.downloadData()
     }
     
     func countOfRowsFor(_ section: Int) -> Int {
@@ -76,5 +73,9 @@ class ViewModel: ViewModelType, DataManagerDelegate {
                 delegate?.updateCurrenciesList(isNeedUpdateBaseCurrency: false)
             }
         }
+    }
+    
+    func dataUpdateError(_ errorDescription: String) {
+        delegate?.updateError(errorDescription)
     }
 }

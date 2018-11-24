@@ -11,16 +11,21 @@ import Alamofire
 
 class NetworkManager:NSObject {
     
-    private var dataManager = DataManager()
+    typealias Success = ([String:Any])->()
+    typealias Failure = (Error)->()
     
-    func loadData(forCurrency currency:String = "EUR") {
+    func loadData(forCurrency currency:String = "EUR", success:Success? = nil, failure:Failure? = nil) {
         let fullPath = "https://revolut.duckdns.org/latest?base=" + currency
-        Alamofire.request(fullPath).responseJSON { [weak self] (response) in
+        Alamofire.request(fullPath).responseJSON { (response) in
             if let error = response.error {
-                print(error)
+                if let failure = failure {
+                    failure(error)
+                }
             } else {
                 if let jsonDictionary = response.result.value as? [String:Any] {
-                    self?.dataManager.saveCurrenciesFrom(jsonDictionary)
+                    if let success = success {
+                        success(jsonDictionary)
+                    }
                 }
             }
         }

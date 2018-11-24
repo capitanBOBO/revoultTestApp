@@ -12,7 +12,7 @@ import Foundation
 protocol ViewModelType {
     
     var delegate:ViewModelDelegate? { set get }
-    func startDataUpdating()
+    func downloadData()
     func countOfRowsFor(_ section: Int) -> Int
     func cellViewModelFor(_ indexPath: IndexPath) -> CellViewModel?
 }

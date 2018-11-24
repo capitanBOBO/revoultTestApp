@@ -11,6 +11,7 @@ import CoreData
 
 protocol DataManagerDelegate: class {
     func dataWasUpdated()
+    func dataUpdateError(_ errorDescription: String)
 }
 
 class DataManager:NSObject {
@@ -18,6 +19,8 @@ class DataManager:NSObject {
     override init() {
         super.init()
         NotificationCenter.default.addObserver(self, selector: #selector(contextDidSave(_:)), name: Notification.Name.NSManagedObjectContextDidSave, object: CD.shared.backgroundCotext)
+        NotificationCenter.default.addObserver(self, selector: #selector(contextDidSave(_:)), name: Notification.Name.NSManagedObjectContextDidSave, object: CD.shared.mainContext)
+        
     }
     
     deinit {
@@ -26,70 +29,33 @@ class DataManager:NSObject {
     
     weak var delegate:DataManagerDelegate?
     
-    // MARK: - Core Data Saving support
+    private lazy var baseCurrencyName:String = {
+        let currency = "EUR"
+        return currency
+    }()
     
-    func loadCurrency(for name:String? = nil) -> [Currency]? {
-        let currencyFetch = Currency.fetchRequest() as NSFetchRequest<Currency>
-        if let name = name {
-            currencyFetch.predicate = NSPredicate(format: "name = %@", name)
+    private let networkManager = NetworkManager()
+    
+    func downloadData() {
+        if let baseCurrency = self.loadBaseCurrency() {
+            baseCurrencyName = baseCurrency.name
         }
-        currencyFetch.sortDescriptors = [NSSortDescriptor.init(key: "isBase", ascending: false)]
-        if let currencies = try? CD.shared.managedObjectContext.fetch(currencyFetch) {
-            return currencies
-        } else {
-            print("Load data failure")
-            return nil
-        }
+        networkManager.loadData(forCurrency: baseCurrencyName, success: { [weak self] (result) in
+            self?.saveCurrenciesFrom(result)
+            }, failure: { [weak self] (error) in
+                self?.delegate?.dataUpdateError(error.localizedDescription)
+        })
     }
     
-    func loadBaseCurrency() -> Currency? {
-        let currencyFetch = Currency.fetchRequest() as NSFetchRequest<Currency>
-        currencyFetch.predicate = NSPredicate(format: "isBase = %@", NSNumber.init(value: true))
-        if let currencies = try? CD.shared.managedObjectContext.fetch(currencyFetch) {
-            return currencies.first
-        } else {
-            print("Load data failure")
-            return nil
-        }
-    }
-    
-    func updateBaseCurrency(value: Float) {
-        DispatchQueue.global().sync { [weak self] in
-            if let currencies = self?.loadCurrency() {
-                for currency in currencies {
-                    if currency.isBase {
-                        currency.value = value
-                    } else {
-                        currency.value = currency.rate * value
-                    }
-                }
-                CD.shared.saveContext()
-            }
-        }
-    }
-    
-    func setCurrencyAsBase(_ name: String) {
-        DispatchQueue.global().async { [weak self] in
-            guard let currencies = self?.loadCurrency() else {
-                return
-            }
-            if let oldBase = currencies.filter({$0.isBase}).first,
-                let newBase = currencies.filter({$0.name == name}).first {
-                oldBase.isBase = false
-                newBase.isBase = true
-                CD.shared.saveContext()
-            }
-        }
-    }
-    
-    func saveCurrenciesFrom(_ dictionary: [String:Any]) {
-        DispatchQueue.global().async { [weak self] in
+    private func saveCurrenciesFrom(_ dictionary: [String:Any]) {
+        DispatchQueue.global(qos: .utility).async { [weak self] in
             if let (base, rates) = (dictionary["base"], dictionary["rates"]) as? (String, [String:Any]) {
                 var baseCurrencyValue:Float = 1.0
-                if let baseCurrency = self?.loadCurrency(for: base)?.first {
-                    baseCurrency.isBase = true
-                    baseCurrency.rate = 1.0
-                    baseCurrencyValue = baseCurrency.value
+                if let baseCurrency = self?.loadBaseCurrency() {
+                    if baseCurrency.name == base {
+                        baseCurrency.rate = 1.0
+                        baseCurrencyValue = baseCurrency.value
+                    }
                 } else {
                     let baseCurrency = Currency(context: CD.shared.managedObjectContext)
                     baseCurrency.isBase = true
@@ -117,8 +83,62 @@ class DataManager:NSObject {
         }
     }
     
+    func loadCurrency(for name:String? = nil) -> [Currency]? {
+        let currencyFetch = Currency.fetchRequest() as NSFetchRequest<Currency>
+        if let name = name {
+            currencyFetch.predicate = NSPredicate(format: "name = %@", name)
+        }
+        currencyFetch.sortDescriptors = [NSSortDescriptor.init(key: "isBase", ascending: false)]
+        if let currencies = try? CD.shared.managedObjectContext.fetch(currencyFetch) {
+            return currencies
+        } else {
+            print("Load data failure")
+            return nil
+        }
+    }
+    
+    func loadBaseCurrency() -> Currency? {
+        let currencyFetch = Currency.fetchRequest() as NSFetchRequest<Currency>
+        currencyFetch.predicate = NSPredicate(format: "isBase = %@", NSNumber.init(value: true))
+        if let currencies = try? CD.shared.managedObjectContext.fetch(currencyFetch) {
+            return currencies.first
+        } else {
+            print("Load data failure")
+            return nil
+        }
+    }
+    
+    func updateBaseCurrency(value: Float) {
+        DispatchQueue.global(qos: .utility).async { [weak self] in
+            if let currencies = self?.loadCurrency() {
+                for currency in currencies {
+                    if currency.isBase {
+                        currency.value = value
+                    } else {
+                        currency.value = currency.rate * value
+                    }
+                }
+                CD.shared.saveContext()
+            }
+        }
+    }
+    
+    func setCurrencyAsBase(_ name: String) {
+        DispatchQueue.global(qos: .utility).async { [weak self] in
+            guard let currencies = self?.loadCurrency() else {
+                return
+            }
+            if let oldBase = currencies.filter({$0.isBase}).first,
+                let newBase = currencies.filter({$0.name == name}).first {
+                oldBase.isBase = false
+                newBase.isBase = true
+                CD.shared.saveContext()
+            }
+        }
+    }
+    
     @objc private func contextDidSave(_ notification: Notification) {
-        DispatchQueue.main.sync { [weak self] in
+        DispatchQueue.main.async { [weak self] in
             self?.delegate?.dataWasUpdated()
         }
     }
