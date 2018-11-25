@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		05BC0E6421A99F3300A2E5D5 /* NetworkManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC0E6321A99F3300A2E5D5 /* NetworkManagerTest.swift */; };
 		05BC0E6821A9B6A000A2E5D5 /* DataManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC0E6721A9B6A000A2E5D5 /* DataManagerTest.swift */; };
+		05BC0E6E21A9CD4800A2E5D5 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC0E6D21A9CD4800A2E5D5 /* ErrorView.swift */; };
+		05BC0E7021AA82F600A2E5D5 /* CurrencyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC0E6F21AA82F600A2E5D5 /* CurrencyListViewController.swift */; };
 		05EE1E9221936C5D00A78783 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EE1E9121936C5D00A78783 /* AppDelegate.swift */; };
 		05EE1E9A21936C5D00A78783 /* revoultTestApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05EE1E9821936C5D00A78783 /* revoultTestApp.xcdatamodeld */; };
 		05EE1E9C21936C5F00A78783 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1E9B21936C5F00A78783 /* Assets.xcassets */; };
 		05EE1E9F21936C5F00A78783 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1E9D21936C5F00A78783 /* LaunchScreen.storyboard */; };
-		05EE1EBA21937B5800A78783 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EE1EB921937B5800A78783 /* TableViewController.swift */; };
 		05FF447F2194BE3E0003F6E4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF447E2194BE3E0003F6E4 /* NetworkManager.swift */; };
 		05FF4483219704700003F6E4 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF4481219704700003F6E4 /* TableViewCell.swift */; };
 		05FF4484219704700003F6E4 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05FF4482219704700003F6E4 /* TableViewCell.xib */; };
@@ -41,6 +42,8 @@
 /* Begin PBXFileReference section */
 		05BC0E6321A99F3300A2E5D5 /* NetworkManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTest.swift; sourceTree = "<group>"; };
 		05BC0E6721A9B6A000A2E5D5 /* DataManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerTest.swift; sourceTree = "<group>"; };
+		05BC0E6D21A9CD4800A2E5D5 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		05BC0E6F21AA82F600A2E5D5 /* CurrencyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListViewController.swift; sourceTree = "<group>"; };
 		05EE1E8E21936C5D00A78783 /* revoultTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = revoultTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05EE1E9121936C5D00A78783 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05EE1E9921936C5D00A78783 /* revoultTestApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = revoultTestApp.xcdatamodel; sourceTree = "<group>"; };
@@ -49,7 +52,6 @@
 		05EE1EA021936C5F00A78783 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05EE1EA521936C5F00A78783 /* revoultTestAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = revoultTestAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		05EE1EAB21936C5F00A78783 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		05EE1EB921937B5800A78783 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		05FF447E2194BE3E0003F6E4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		05FF4481219704700003F6E4 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		05FF4482219704700003F6E4 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
@@ -85,6 +87,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05BC0E6C21A9CD3700A2E5D5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				05BC0E6D21A9CD4800A2E5D5 /* ErrorView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		05EE1E8521936C5D00A78783 = {
 			isa = PBXGroup;
 			children = (
@@ -161,7 +171,8 @@
 			children = (
 				05FF4480219702CA0003F6E4 /* Cell */,
 				05FF4485219718D90003F6E4 /* ViewModel */,
-				05EE1EB921937B5800A78783 /* TableViewController.swift */,
+				05BC0E6C21A9CD3700A2E5D5 /* View */,
+				05BC0E6F21AA82F600A2E5D5 /* CurrencyListViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -404,9 +415,10 @@
 				05EE1E9A21936C5D00A78783 /* revoultTestApp.xcdatamodeld in Sources */,
 				05FF448C219724630003F6E4 /* CellViewModel.swift in Sources */,
 				05FF448E219736870003F6E4 /* ViewModelType.swift in Sources */,
-				05EE1EBA21937B5800A78783 /* TableViewController.swift in Sources */,
 				05FF449E21980F3A0003F6E4 /* Currency+CoreDataProperties.swift in Sources */,
+				05BC0E7021AA82F600A2E5D5 /* CurrencyListViewController.swift in Sources */,
 				05FF4487219719160003F6E4 /* ViewModel.swift in Sources */,
+				05BC0E6E21A9CD4800A2E5D5 /* ErrorView.swift in Sources */,
 				05FF44902197373A0003F6E4 /* CellViewModelType.swift in Sources */,
 				05EE1E9221936C5D00A78783 /* AppDelegate.swift in Sources */,
 			);

@@ -13,6 +13,6 @@ protocol ViewModelType {
     
     var delegate:ViewModelDelegate? { set get }
     func downloadData()
-    func countOfRowsFor(_ section: Int) -> Int
+    func countOfRows() -> Int
     func cellViewModelFor(_ indexPath: IndexPath) -> CellViewModel?
 }
