@@ -20,15 +20,12 @@ class ViewModel: ViewModelType, DataManagerDelegate {
     var firstLoad = true
     private var dataManager = DataManager()
     private var currencyArray = [Currency]()
-    private var curretnBaseCurrency = "EUR"
+    private var baseCurrency:Currency!
     
     weak var delegate: ViewModelDelegate?
     
     init() {
         dataManager.delegate = self
-        if let baseCurrency = dataManager.loadBaseCurrency() {
-            curretnBaseCurrency = baseCurrency.name
-        }
     }
     
     func downloadData() {
@@ -47,31 +44,25 @@ class ViewModel: ViewModelType, DataManagerDelegate {
     }
     
     func dataWasUpdated(_ updatedData: [Currency]) {
-        if currencyArray.isEmpty {
-            if let tempArray = dataManager.loadCurrency() {
-                currencyArray = Array(tempArray)
-                delegate?.updateCurrenciesListAt(nil)
-            }
-        } else {
-            var indexPaths = [IndexPath]()
-            for updatedCurrency in updatedData {
-                guard let currentCurrency = currencyArray.first(where: {$0.name == updatedCurrency.name}) else {
-                    continue
-                }
-                guard let index = currencyArray.firstIndex(of: currentCurrency) else {
-                    continue
-                }
-                indexPaths.append(IndexPath(row: index, section: 0))
-//                if currency.isBase {
-//                    indexPaths.append(IndexPath(row: 0, section: 0))
-//                    if let index = currencyArray.firstIndex(of: currency) {
-//                        indexPaths.append(IndexPath(row: index, section: 0))
-//                    }
-//                }
-            }
-            delegate?.updateCurrenciesListAt(indexPaths)
+        if let tempArray = dataManager.loadCurrency() {
+            currencyArray = Array(tempArray)
         }
-        
+        if baseCurrency == nil {
+            baseCurrency = currencyArray.first(where: {$0.isBase})
+            delegate?.updateCurrenciesListAt(nil)
+            return
+        }
+        var indexPaths = [IndexPath]()
+        for (index, _) in currencyArray.filter({!$0.isBase}).enumerated() {
+            indexPaths.append(IndexPath(row: index + 1, section: 0))
+        }
+        if let base = currencyArray.first(where: {$0.isBase}) {
+            if base.name != baseCurrency.name {
+                indexPaths.append(IndexPath(row: 0, section: 0))
+                baseCurrency = base
+            }
+        }
+        delegate?.updateCurrenciesListAt(indexPaths)
     }
     
     func dataUpdateError(_ errorDescription: String) {

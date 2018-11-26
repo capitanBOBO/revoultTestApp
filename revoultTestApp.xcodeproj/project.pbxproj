@@ -26,6 +26,7 @@
 		05FF449E21980F3A0003F6E4 /* Currency+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF449C21980F3A0003F6E4 /* Currency+CoreDataProperties.swift */; };
 		05FF449F21980F3A0003F6E4 /* Currency+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF449D21980F3A0003F6E4 /* Currency+CoreDataClass.swift */; };
 		05FF44A2219864130003F6E4 /* CD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FF44A1219864130003F6E4 /* CD.swift */; };
+		6CA1892A21ABE2BB00C293FB /* ViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA1892921ABE2BB00C293FB /* ViewModelTest.swift */; };
 		F41A5C2E636A8B463EDC67C2 /* Pods_revoultTestApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DACC73EAED36A365EC7A24 /* Pods_revoultTestApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,7 @@
 		05FF44A1219864130003F6E4 /* CD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CD.swift; sourceTree = "<group>"; };
 		0CDD10049D894F1938929B11 /* Pods-revoultTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-revoultTestApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-revoultTestApp/Pods-revoultTestApp.release.xcconfig"; sourceTree = "<group>"; };
 		33DACC73EAED36A365EC7A24 /* Pods_revoultTestApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_revoultTestApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CA1892921ABE2BB00C293FB /* ViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTest.swift; sourceTree = "<group>"; };
 		CD2E8279EAA715B54405AD92 /* Pods-revoultTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-revoultTestApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-revoultTestApp/Pods-revoultTestApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,6 +135,7 @@
 				05EE1EAB21936C5F00A78783 /* Info.plist */,
 				05BC0E6321A99F3300A2E5D5 /* NetworkManagerTest.swift */,
 				05BC0E6721A9B6A000A2E5D5 /* DataManagerTest.swift */,
+				6CA1892921ABE2BB00C293FB /* ViewModelTest.swift */,
 			);
 			path = revoultTestAppTests;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CA1892A21ABE2BB00C293FB /* ViewModelTest.swift in Sources */,
 				05BC0E6421A99F3300A2E5D5 /* NetworkManagerTest.swift in Sources */,
 				05BC0E6821A9B6A000A2E5D5 /* DataManagerTest.swift in Sources */,
 			);

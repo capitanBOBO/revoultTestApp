@@ -58,6 +58,7 @@ class CurrencyListViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        MBProgressHUD.showAdded(to: view, animated: true)
         downloadTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] (timer) in
             self?.viewModel.downloadData()
         })
@@ -119,6 +120,10 @@ class CurrencyListViewController: UIViewController, UITableViewDelegate, UITable
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         textFieldBecomeFirstResponder(false)
+    }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        textFieldBecomeFirstResponder(true)
     }
     
 }

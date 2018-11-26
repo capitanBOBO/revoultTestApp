@@ -103,7 +103,7 @@ class DataManagerTest: XCTestCase, DataManagerDelegate {
     
     //MARK: DataMAnager delegate
     
-    func dataWasUpdated() {
+    func dataWasUpdated(_ updatedData: [Currency]) {
         promise.fulfill()
     }
     

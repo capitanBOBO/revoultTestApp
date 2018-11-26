@@ -106,7 +106,7 @@ class DataManager:NSObject {
     }
     
     func updateBaseCurrency(value: Float) {
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+        DispatchQueue.global(qos: .utility).async { [weak self] in
             if let currencies = self?.loadCurrency() {
                 for currency in currencies {
                     if currency.isBase {
@@ -121,7 +121,7 @@ class DataManager:NSObject {
     }
     
     func setCurrencyAsBase(_ name: String) {
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+        DispatchQueue.global(qos: .utility).async { [weak self] in
             guard let currencies = self?.loadCurrency() else {
                 return
             }
