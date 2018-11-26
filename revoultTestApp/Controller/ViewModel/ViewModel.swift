@@ -48,20 +48,26 @@ class ViewModel: ViewModelType, DataManagerDelegate {
     
     func dataWasUpdated(_ updatedData: [Currency]) {
         if currencyArray.isEmpty {
-            if let currencies = dataManager.loadCurrency(), !currencies.isEmpty {
-                currencyArray = currencies
-            } else {
-                currencyArray = updatedData
+            if let tempArray = dataManager.loadCurrency() {
+                currencyArray = Array(tempArray)
+                delegate?.updateCurrenciesListAt(nil)
             }
-            delegate?.updateCurrenciesListAt(nil)
         } else {
             var indexPaths = [IndexPath]()
-            let tempCurrencyArray = Array(currencyArray)
-            for (index, currency) in tempCurrencyArray.enumerated() {
-                if let newCurrency = updatedData.first(where: {$0.name == currency.name}) {
-                    indexPaths.append(IndexPath(row: index, section: 0))
-                    currencyArray[index] = newCurrency
+            for updatedCurrency in updatedData {
+                guard let currentCurrency = currencyArray.first(where: {$0.name == updatedCurrency.name}) else {
+                    continue
                 }
+                guard let index = currencyArray.firstIndex(of: currentCurrency) else {
+                    continue
+                }
+                indexPaths.append(IndexPath(row: index, section: 0))
+//                if currency.isBase {
+//                    indexPaths.append(IndexPath(row: 0, section: 0))
+//                    if let index = currencyArray.firstIndex(of: currency) {
+//                        indexPaths.append(IndexPath(row: index, section: 0))
+//                    }
+//                }
             }
             delegate?.updateCurrenciesListAt(indexPaths)
         }
