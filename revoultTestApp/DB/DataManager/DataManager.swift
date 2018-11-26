@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 protocol DataManagerDelegate: class {
-    func dataWasUpdated()
+    func dataWasUpdated(_ updatedData: [Currency])
     func dataUpdateError(_ errorDescription: String)
 }
 
@@ -18,9 +18,7 @@ class DataManager:NSObject {
     
     override init() {
         super.init()
-        NotificationCenter.default.addObserver(self, selector: #selector(contextDidSave(_:)), name: Notification.Name.NSManagedObjectContextDidSave, object: CD.shared.backgroundCotext)
-        NotificationCenter.default.addObserver(self, selector: #selector(contextDidSave(_:)), name: Notification.Name.NSManagedObjectContextDidSave, object: CD.shared.mainContext)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(contextDidUpdate), name: Notification.Name.NSManagedObjectContextObjectsDidChange, object: CD.shared.backgroundCotext)
     }
     
     deinit {
@@ -52,7 +50,9 @@ class DataManager:NSObject {
             if let (base, rates) = (dictionary["base"], dictionary["rates"]) as? (String, [String:Any]) {
                 var baseCurrencyValue:Float = 1.0
                 if let baseCurrency = self?.loadBaseCurrency() {
-                    baseCurrencyValue = baseCurrency.value
+                    if baseCurrency.name == base {
+                        baseCurrencyValue = baseCurrency.value
+                    }
                 } else {
                     let baseCurrency = Currency(context: CD.shared.managedObjectContext)
                     baseCurrency.isBase = true
@@ -135,9 +135,17 @@ class DataManager:NSObject {
         }
     }
     
-    @objc private func contextDidSave(_ notification: Notification) {
-        DispatchQueue.main.async { [weak self] in
-            self?.delegate?.dataWasUpdated()
+    @objc private func contextDidUpdate(_ notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        
+        if let inserts = userInfo[NSInsertedObjectsKey] as? Set<Currency>, inserts.count > 0 {
+            DispatchQueue.main.async { [weak self] in
+                self?.delegate?.dataWasUpdated(Array(inserts).sorted(by: {$1.isBase}))
+            }
+        } else if let updates = userInfo[NSUpdatedObjectsKey] as? Set<Currency>, updates.count > 0 {
+            DispatchQueue.main.async { [weak self] in
+                self?.delegate?.dataWasUpdated(Array(updates))
+            }
         }
     }
 }
