@@ -52,10 +52,7 @@ class DataManager:NSObject {
             if let (base, rates) = (dictionary["base"], dictionary["rates"]) as? (String, [String:Any]) {
                 var baseCurrencyValue:Float = 1.0
                 if let baseCurrency = self?.loadBaseCurrency() {
-                    if baseCurrency.name == base {
-                        baseCurrency.rate = 1.0
-                        baseCurrencyValue = baseCurrency.value
-                    }
+                    baseCurrencyValue = baseCurrency.value
                 } else {
                     let baseCurrency = Currency(context: CD.shared.managedObjectContext)
                     baseCurrency.isBase = true
@@ -132,6 +129,7 @@ class DataManager:NSObject {
                 let newBase = currencies.filter({$0.name == name}).first {
                 oldBase.isBase = false
                 newBase.isBase = true
+                newBase.rate = 1.0
                 CD.shared.saveContext()
             }
         }
