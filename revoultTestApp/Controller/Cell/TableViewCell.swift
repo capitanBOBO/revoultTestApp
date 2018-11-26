@@ -14,6 +14,7 @@ class TableViewCell: UITableViewCell, UITextFieldDelegate {
         didSet {
             self.titleLabel.text = viewModel.currencyName
             self.valueTextField.text = viewModel.currencyValue
+            self.valueTextField.isUserInteractionEnabled = viewModel.isBaseCurrency
         }
     }
     
